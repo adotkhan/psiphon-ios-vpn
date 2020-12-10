@@ -62,8 +62,10 @@ import PsiCashClient
 
     @objc func dismiss(screen: DismissibleScreen, completion: (() -> Void)?)
 
+    #if !targetEnvironment(macCatalyst)
     @objc func presentUntunneledRewardedVideoAd(customData: CustomData,
                                                 delegate: RewardedVideoAdBridgeDelegate)
+    #endif
     
     @objc func presentSubscriptionIAPViewController()
 }

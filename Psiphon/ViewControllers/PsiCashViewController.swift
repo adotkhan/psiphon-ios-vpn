@@ -130,7 +130,9 @@ final class PsiCashViewController: ReactiveViewController {
                 PsiCashCoinPurchaseTable(purchaseHandler: { [unowned store] in
                     switch $0 {
                     case .rewardedVideoAd:
+                        #if !targetEnvironment(macCatalyst)
                         store.send(.psiCashAction(.showRewardedVideoAd))
+                        #endif
                     case .product(let product):
                         store.send(.mainViewAction(.psiCashViewAction(
                                                     .purchaseTapped(product: product))))

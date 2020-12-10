@@ -24,7 +24,6 @@
 #import <ReactiveObjC/NSNotificationCenter+RACSupport.h>
 #import <stdatomic.h>
 #import "AppDelegate.h"
-#import "AdManager.h"
 #import "AppInfo.h"
 #import "EmbeddedServerEntries.h"
 #import "IAPViewController.h"
@@ -36,7 +35,6 @@
 #import "RootContainerController.h"
 #import "SharedConstants.h"
 #import "UIAlertController+Additions.h"
-#import "AdManager.h"
 #import "Logging.h"
 #import "NEBridge.h"
 #import "DispatchUtils.h"
@@ -55,6 +53,10 @@
 #import "AppObservables.h"
 #import <PsiphonTunnel/PsiphonTunnel.h>
 #import "RegionAdapter.h"
+
+#if !TARGET_OS_MACCATALYST
+#import "AdManager.h"
+#endif
 
 PsiFeedbackLogType const RewardedVideoLogType = @"RewardedVideo";
 
@@ -126,11 +128,13 @@ willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // UIKit always waits for application:didFinishLaunchingWithOptions:
     // to return before making the window visible on the screen.
     [self.window makeKeyAndVisible];
-    
+
+#if !TARGET_OS_MACCATALYST
     // Forwards AdManager `adIsShowing` events to SwiftDelegate.
     [self.compoundDisposable addDisposable:[[AdManager sharedInstance].adIsShowing subscribeNext:^(NSNumber * _Nullable adisShowingObj) {
         [SwiftDelegate.bridge onAdPresentationStatusChange: [adisShowingObj boolValue]];
     }]];
+#endif
     
     return YES;
 }
@@ -203,6 +207,8 @@ willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         
         return nil;
     }] flattenMap:^RACSignal<SwitchedVPNStartStopIntent *> *(SwitchedVPNStartStopIntent *value) {
+
+#if !TARGET_OS_MACCATALYST
         if (value.startButtonAction == StartButtonActionStartTunnelWithAds) {
             // Start tunnel after ad presentation signal completes.
             // We always want to start the tunnel after the presentation signal
@@ -215,6 +221,12 @@ willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         } else {
             return [RACSignal return:value];
         }
+#else
+        // TARGET_OS_MACCATALYST
+        return [RACSignal return:value];
+#endif // !TARGET_OS_MACCATALYST
+
+
     }] doNext:^(SwitchedVPNStartStopIntent *value) {
         dispatch_async_main(^{
             [SwiftDelegate.bridge sendNewVPNIntent:value];
@@ -399,6 +411,7 @@ willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     }
 }
 
+#if !TARGET_OS_MACCATALYST
 - (void)presentUntunneledRewardedVideoAdWithCustomData:(NSString *)customData
                                               delegate:(id<RewardedVideoAdBridgeDelegate>)delegate {
     // No-op if there's an active subscription for displaying rewarded videos.
@@ -530,7 +543,9 @@ willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
             strongSelf->rewardedVideoAdDisposable = nil;
         }
     }];
+
 }
+#endif // !TARGET_OS_MACCATALYST
 
 - (void)presentSubscriptionIAPViewController {
     IAPViewController* iapViewController = [[IAPViewController alloc] init];

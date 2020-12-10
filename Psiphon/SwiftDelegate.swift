@@ -188,13 +188,17 @@ let appDelegateReducer = Reducer<AppDelegateReducerState,
 // MARK: Bridge API
 
 extension SwiftDelegate: RewardedVideoAdBridgeDelegate {
+
     func adPresentationStatus(_ status: AdPresentation) {
+        #if !targetEnvironment(macCatalyst)
         self.store.send(.psiCash(
                             .rewardedVideoPresentation(RewardedVideoPresentation(objcAdPresentation: status)))
         )
+        #endif
     }
     
     func adLoadStatus(_ status: AdLoadStatus, error: NSError?) {
+        #if !targetEnvironment(macCatalyst)
         let loadResult: RewardedVideoLoad
         if let error = error {
             // Note that error event is created here as opposed to the origin
@@ -209,6 +213,7 @@ extension SwiftDelegate: RewardedVideoAdBridgeDelegate {
             }
         }
         self.store.send(.psiCash(.rewardedVideoLoad(loadResult)))
+        #endif
     }
     
     func installVPNConfig() -> Promise<VPNConfigInstallResult> {

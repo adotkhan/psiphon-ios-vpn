@@ -350,9 +350,29 @@ let psiCashReducer = Reducer<PsiCashReducerState, PsiCashAction, PsiCashEnvironm
                 environment.feedbackLogger.log(.error, errorEvent).mapNever()
             ]
         }
-        
+
+    case .connectToPsiphonTapped:
+        return [
+            .fireAndForget { [unowned objcBridgeDelegate = environment.objcBridgeDelegate] in
+                objcBridgeDelegate?.dismiss(screen: .psiCash, completion: {
+                    objcBridgeDelegate?.startStopVPNWithInterstitial()
+                })
+            }
+        ]
+
+    case .dismissedAlert(let dismissed):
+        switch dismissed {
+        case .speedBoostAlreadyActive:
+            state.psiCash.purchasing = .none
+            return []
+        case .rewardedVideo:
+            state.psiCash.rewardedVideo.combineWithErrorDismissed()
+            return []
+        }
+
+    #if !targetEnvironment(macCatalyst)
     case .showRewardedVideoAd:
-        
+
         guard state.psiCash.libLoaded else {
             return []
         }
@@ -404,24 +424,8 @@ let psiCashReducer = Reducer<PsiCashReducerState, PsiCashAction, PsiCashEnvironm
     case .rewardedVideoLoad(let loadStatus):
         state.psiCash.rewardedVideo.combine(loading: loadStatus)
         return []
-        
-    case .dismissedAlert(let dismissed):
-        switch dismissed {
-        case .speedBoostAlreadyActive:
-            state.psiCash.purchasing = .none
-            return []
-        case .rewardedVideo:
-            state.psiCash.rewardedVideo.combineWithErrorDismissed()
-            return []
-        }
-        
-    case .connectToPsiphonTapped:
-        return [
-            .fireAndForget { [unowned objcBridgeDelegate = environment.objcBridgeDelegate] in
-                objcBridgeDelegate?.dismiss(screen: .psiCash, completion: {
-                    objcBridgeDelegate?.startStopVPNWithInterstitial()
-                })
-            }
-        ]
+
+#endif // !targetEnvironment(macCatalyst)
+
     }
 }

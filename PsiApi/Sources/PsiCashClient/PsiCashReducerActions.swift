@@ -42,12 +42,15 @@ public enum PsiCashAction: Equatable {
     
     case accountLogin(username: String, password: SecretString)
     case _accountLoginResult(PsiCashEffects.PsiCashAccountLoginResult)
-    
+
+    case connectToPsiphonTapped
+    case dismissedAlert(PsiCashAlertDismissAction)
+
+    #if !targetEnvironment(macCatalyst)
     case showRewardedVideoAd
     case rewardedVideoPresentation(RewardedVideoPresentation)
     case rewardedVideoLoad(RewardedVideoLoad)
-    case connectToPsiphonTapped
-    case dismissedAlert(PsiCashAlertDismissAction)
+    #endif
 }
 
 public enum PsiCashAlertDismissAction: Equatable {

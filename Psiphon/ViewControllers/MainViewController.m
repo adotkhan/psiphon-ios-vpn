@@ -19,7 +19,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MainViewController.h"
-#import "AdManager.h"
 #import "AppInfo.h"
 #import "AppDelegate.h"
 #import "Asserts.h"
@@ -50,8 +49,11 @@
 #import "SkyRegionSelectionViewController.h"
 #import "UIView+Additions.h"
 #import "AppObservables.h"
-#import <PersonalizedAdConsent/PersonalizedAdConsent.h>
 #import "Psiphon-Swift.h"
+
+#if !TARGET_OS_MACCATALYST
+#import "AdManager.h"
+#endif
 
 PsiFeedbackLogType const MainViewControllerLogType = @"MainViewController";
 
@@ -64,7 +66,10 @@ NSTimeInterval const MaxAdLoadingTime = 10.f;
 @interface MainViewController ()
 
 @property (nonatomic) RACCompoundDisposable *compoundDisposable;
+
+#if !TARGET_OS_MACCATALYST
 @property (nonatomic) AdManager *adManager;
+#endif
 
 @property (nonatomic, readonly) BOOL startVPNOnFirstLoad;
 
@@ -127,8 +132,10 @@ NSTimeInterval const MaxAdLoadingTime = 10.f;
     if (self) {
         
         _compoundDisposable = [RACCompoundDisposable compoundDisposable];
-        
+
+#if !TARGET_OS_MACCATALYST
         _adManager = [AdManager sharedInstance];
+#endif
 
         // TODO: remove persistance from init function.
         [self persistSettingsToSharedUserDefaults];
@@ -323,12 +330,15 @@ NSTimeInterval const MaxAdLoadingTime = 10.f;
             [AppDelegate.sharedAppDelegate startStopVPNWithAd:FALSE];
         }
     }
-    
+
+#if !TARGET_OS_MACCATALYST
     // Initializes AdManager.
     {
         [[AdManager sharedInstance] initializeAdManager];
         [[AdManager sharedInstance] initializeRewardedVideos];
     }
+#endif
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -381,7 +391,24 @@ NSTimeInterval const MaxAdLoadingTime = 10.f;
 #pragma mark - Public properties
 
 - (RACSignal<RACUnit *> *)activeStateLoadingSignal {
-    
+
+    // subscriptionLoadingSignal emits a value when the user subscription status becomes known.
+    RACSignal *subscriptionLoadingSignal = [[AppObservables.shared.subscriptionStatus
+                                             filter:^BOOL(BridgedUserSubscription *status) {
+        return status.state != BridgedSubscriptionStateUnknown;
+    }]
+                                            take:1];
+
+    RACSignal<NSNumber *> *isCurrentlySpeedBoosted = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        [SwiftDelegate.bridge isCurrentlySpeedBoostedWithCompletionHandler:^(BOOL activeSpeedBoost) {
+            [subscriber sendNext: [NSNumber numberWithBool:activeSpeedBoost]];
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+
+#if !TARGET_OS_MACCATALYST
+
     // If MainViewController is started from onboarding, dismisses launch screen.
     if (self.startVPNOnFirstLoad == TRUE) {
         return [RACSignal return:RACUnit.defaultUnit];
@@ -426,21 +453,6 @@ NSTimeInterval const MaxAdLoadingTime = 10.f;
         }
     }] switchToLatest] take:1];
 
-    // subscriptionLoadingSignal emits a value when the user subscription status becomes known.
-    RACSignal *subscriptionLoadingSignal = [[AppObservables.shared.subscriptionStatus
-      filter:^BOOL(BridgedUserSubscription *status) {
-        return status.state != BridgedSubscriptionStateUnknown;
-      }]
-      take:1];
-    
-    RACSignal<NSNumber *> *isCurrentlySpeedBoosted = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-        [SwiftDelegate.bridge isCurrentlySpeedBoostedWithCompletionHandler:^(BOOL activeSpeedBoost) {
-            [subscriber sendNext: [NSNumber numberWithBool:activeSpeedBoost]];
-            [subscriber sendCompleted];
-        }];
-        return nil;
-    }];
-
     // Returned signal emits RACUnit and completes immediately after all loading operations
     // are done.
     return [[subscriptionLoadingSignal zipWith:isCurrentlySpeedBoosted]
@@ -460,6 +472,21 @@ NSTimeInterval const MaxAdLoadingTime = 10.f;
             return unsubscribedAdLoadingSignal;
         }
     }];
+
+#else // !TARGET_OS_MACCATALYST
+    // Target is Mac Catalyst.
+
+    // Returned signal emits RACUnit and completes immediately after all loading operations
+    // are done.
+    return [[subscriptionLoadingSignal zipWith:isCurrentlySpeedBoosted]
+            flattenMap:^RACSignal *(NSArray *x) {
+
+        return [RACSignal return:RACUnit.defaultUnit];
+
+    }];
+
+#endif // !TARGET_OS_MACCATALYST
+
 }
 
 #pragma mark - UI callbacks

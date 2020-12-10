@@ -24,19 +24,25 @@
 #import "RACCompoundDisposable.h"
 #import "RACReplaySubject.h"
 #import "Asserts.h"
-#import "AdManager.h"
 #import "Strings.h"
 #import "UIAlertController+Additions.h"
 #import "AppObservables.h"
 #import "Psiphon-Swift.h"
+
+#if !TARGET_OS_MACCATALYST
+#import "AdManager.h"
+#endif
 
 // Specifier keys for cells in settings menu
 // These keys are defined in Psiphon/InAppSettings.bundle/Root.inApp.plist
 NSString * const SettingsPsiCashCellSpecifierKey = @"settingsPsiCash";
 NSString * const SettingsSubscriptionCellSpecifierKey = @"settingsSubscription";
 NSString * const SettingsReinstallVPNConfigurationKey = @"settingsReinstallVPNConfiguration";
-NSString * const SettingsResetAdConsentCellSpecifierKey = @"settingsResetAdConsent";
 NSString * const SettingsPsiCashAccountLogoutCellSpecifierKey = @"settingsLogOutPsiCashAccount";
+
+#if !TARGET_OS_MACCATALYST
+NSString * const SettingsResetAdConsentCellSpecifierKey = @"settingsResetAdConsent";
+#endif
 
 @interface SettingsViewController ()
  
@@ -177,11 +183,13 @@ NSString * const SettingsPsiCashAccountLogoutCellSpecifierKey = @"settingsLogOut
         [SwiftDelegate.bridge reinstallVPNConfig];
         [self settingsViewControllerDidEnd:nil];
 
+#if !TARGET_OS_MACCATALYST
     } else if ([specifier.key isEqualToString:SettingsResetAdConsentCellSpecifierKey]) {
         [self onResetConsent];
         NSIndexPath *path = [tableView indexPathForCell:resetConsentCell];
         [tableView deselectRowAtIndexPath:path animated:TRUE];
-        
+#endif
+
     } else if ([specifier.key isEqualToString:SettingsPsiCashAccountLogoutCellSpecifierKey]) {
         [self onPsiCashAccountLogOut];
         NSIndexPath *path = [tableView indexPathForCell:psiCashAccountLogOutCell];
@@ -196,7 +204,9 @@ NSString * const SettingsPsiCashAccountLogoutCellSpecifierKey = @"settingsLogOut
       SettingsPsiCashCellSpecifierKey,
       SettingsSubscriptionCellSpecifierKey,
       SettingsReinstallVPNConfigurationKey,
+#if !TARGET_OS_MACCATALYST
       SettingsResetAdConsentCellSpecifierKey,
+#endif
       SettingsPsiCashAccountLogoutCellSpecifierKey
     ];
 
@@ -224,12 +234,14 @@ NSString * const SettingsPsiCashAccountLogoutCellSpecifierKey = @"settingsLogOut
         reinstallVPNProfileCell = cell;
         [self updateReinstallVPNProfileCell];
 
+#if !TARGET_OS_MACCATALYST
     } else if ([specifier.key isEqualToString:SettingsResetAdConsentCellSpecifierKey]) {
         cell = [super tableView:tableView cellForSpecifier:specifier];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.textColor = self.view.tintColor;
         cell.textLabel.text = [UserStrings Reset_admob_consent];
         resetConsentCell = cell;
+#endif
         
     } else if ([specifier.key isEqualToString:SettingsPsiCashAccountLogoutCellSpecifierKey]) {
         cell = [super tableView:tableView cellForSpecifier:specifier];
@@ -255,6 +267,7 @@ NSString * const SettingsPsiCashAccountLogoutCellSpecifierKey = @"settingsLogOut
     [self.navigationController pushViewController:iapViewController animated:YES];
 }
 
+#if !TARGET_OS_MACCATALYST
 - (void)onResetConsent {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                      message:nil
@@ -276,6 +289,7 @@ NSString * const SettingsPsiCashAccountLogoutCellSpecifierKey = @"settingsLogOut
 
     [alert presentFromTopController];
 }
+#endif
 
 - (void)onPsiCashAccountLogOut {
     UIAlertController *alert = [UIAlertController
