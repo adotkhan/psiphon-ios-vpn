@@ -91,6 +91,11 @@ let psiCashReducer = Reducer<PsiCashReducerState, PsiCashAction, PsiCashEnvironm
                 )
             }
 
+            // TODO! just testing PsiCash
+            effects.append(
+                Effect(value: .refreshPsiCashState())
+            )
+
             return effects
             
         case let .failure(error):

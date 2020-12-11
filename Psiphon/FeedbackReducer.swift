@@ -277,18 +277,19 @@ fileprivate func sendFeedback(userFeedback: UserFeedback,
                     switch feedback {
                     case .success(let feedbackJSON):
 
+                        // TODO! ignore vpn check
                             // Last moment VPN status check.
-                            if let tunnelConnection = value.2 {
-                                if case .connection(let tunnelConnectionVPNStatus) = tunnelConnection.connectionStatus() {
-                                    guard tunnelConnectionVPNStatus == .invalid ||
-                                            tunnelConnectionVPNStatus == .disconnected ||
-                                            tunnelConnectionVPNStatus == .connected else {
-                                        return
-                                            SignalProducer(value: .value(
-                                                            ._log("waiting for VPN to be disconnected or connected")))
-                                    }
-                                }
-                            }
+//                            if let tunnelConnection = value.2 {
+//                                if case .connection(let tunnelConnectionVPNStatus) = tunnelConnection.connectionStatus() {
+//                                    guard tunnelConnectionVPNStatus == .invalid ||
+//                                            tunnelConnectionVPNStatus == .disconnected ||
+//                                            tunnelConnectionVPNStatus == .connected else {
+//                                        return
+//                                            SignalProducer(value: .value(
+//                                                            ._log("waiting for VPN to be disconnected or connected")))
+//                                    }
+//                                }
+//                            }
 
                             // Note: It is possible that the upload could succeed at the same moment
                             // one of the trigger signals (VPN state change, etc.) changes. Then

@@ -665,7 +665,8 @@ extension SwiftDelegate: SwiftBridgeDelegate {
         }
 
     }
-    
+
+    // TODO! this is no longer a useful signal to refresh things.
     @objc func applicationDidBecomeActive(_ application: UIApplication) {
         self.store.send(.appDelegateAction(.appLifecycleEvent(.didBecomeActive)))
         self.store.send(.mainViewAction(.applicationDidBecomeActive))

@@ -165,6 +165,12 @@ extension AppState {
     ///  TunnelProviderManager reference if it exists.
     var tunnelConnection: TunnelConnection? {
         get {
+
+            // TODO!! just testing
+            return TunnelConnection { () -> TunnelConnection.ConnectionResourceStatus in
+                return .connection(.connected)
+            }
+
             // Workaround, since VPN config cannot be installed on a simulator.
             #if targetEnvironment(simulator)
             return TunnelConnection { () -> TunnelConnection.ConnectionResourceStatus in

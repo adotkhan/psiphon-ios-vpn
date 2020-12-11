@@ -170,6 +170,11 @@ UserDefaultsKey const DebugPsiphonConnectionStateStringKey = @"PsiphonDataShared
     NSData *fileData;
     NSError *err;
 
+    // TODO! hack
+    if (filePath == nil) {
+        return nil;
+    }
+
     for (int i = 0; i < MAX_RETRIES; ++i) {
 
         if (!(*fileHandlePtr)) {

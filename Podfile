@@ -36,6 +36,8 @@ end
 # Pod requiring development team hack as described in the following issue:
 # https://github.com/CocoaPods/CocoaPods/issues/8891#issuecomment-546636698
 
+
+# Sets Code sign identity to run locally
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         # Fix bundle targets' 'Signing Certificate' to 'Sign to Run Locally'

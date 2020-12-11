@@ -51,7 +51,7 @@ public struct DebugFlags {
         mainThreadChecks: Bool = true,
         disableURLHandler: Bool = false,
         devServers: Bool = true,
-        ignoreTunneledChecks: Bool = false,
+        ignoreTunneledChecks: Bool = true,
         disableConnectOnDemand: Bool = false,
         printStoreLogs: Bool = false,
         printAppState: Bool = false,
