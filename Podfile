@@ -24,11 +24,26 @@ end
 target 'PsiphonVPN' do
 end
 
+# post_install do |installer|
+#   installer.pods_project.targets.each do |target|
+#     target.build_configurations.each do |config|
+#       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.2'
+#       config.build_settings['ENABLE_BITCODE'] = 'NO'
+#     end
+#   end
+# end
+
+# Pod requiring development team hack as described in the following issue:
+# https://github.com/CocoaPods/CocoaPods/issues/8891#issuecomment-546636698
+
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.2'
-      config.build_settings['ENABLE_BITCODE'] = 'NO'
+    installer.pods_project.targets.each do |target|
+        # Fix bundle targets' 'Signing Certificate' to 'Sign to Run Locally'
+        if target.respond_to?(:product_type) and target.product_type == "com.apple.product-type.bundle"
+            target.build_configurations.each do |config|
+                config.build_settings['CODE_SIGN_IDENTITY[sdk=macosx*]'] = '-'
+            end
+        end
     end
-  end
 end
+
