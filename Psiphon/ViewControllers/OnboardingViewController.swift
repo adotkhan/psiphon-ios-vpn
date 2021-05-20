@@ -23,9 +23,11 @@ import Utilities
 import Promises
 
 /// Represents different stages of onboarding.
-/// Note that each stage may not be limited to only one screen.
+/// Note: Each onboarding stage consists of one or more onboarding screens.
 enum OnboardingStage: String, Codable {
+    
     case languageSelection
+    case noTrackingExplainer
     case privacyPolicy_v2018_05_15
     case vpnConfigPermission
     case userNotificationPermission
@@ -33,6 +35,7 @@ enum OnboardingStage: String, Codable {
     /// Ordered set of the stages that would have to be completed by the user.
     static let stagesToComplete: [OnboardingStage] =
         [ .languageSelection,
+          .noTrackingExplainer,
           .privacyPolicy_v2018_05_15,
           .vpnConfigPermission,
           .userNotificationPermission ]
@@ -52,9 +55,11 @@ enum OnboardingStage: String, Codable {
 
 fileprivate extension OnboardingStage {
     
+    /// Set of onboarding screens for this onboarding stage.
     var screens: OrderedSet<OnboardingScreen> {
         switch self {
         case .languageSelection,
+             .noTrackingExplainer,
              .privacyPolicy_v2018_05_15:
             return [ OnboardingScreen(stage: self, screenIndex: 0) ]
             
@@ -67,17 +72,27 @@ fileprivate extension OnboardingStage {
     
 }
 
-// TODO: Temporary struct for when tuples conform to Hashable.
+/// Represents a single onboarding screen.
+/// - Note: Onboarding consists of onboarding stages, which each stage
+/// consisting of one or more onboarding screens.
 fileprivate struct OnboardingScreen: Hashable {
+    
+    /// Onboarding stage where this onboarding screen belongs.
     let stage: OnboardingStage
+    
+    /// The index of the screen in it's onboarding stage.
     let screenIndex: Int
+    
 }
 
 fileprivate extension OnboardingScreen {
     
+    /// True if the "Next" button should be displayed for this onboaring screen.
     var showNextButton: Bool {
         switch (self.stage, self.screenIndex) {
         case (.languageSelection, 0):
+            return true
+        case (.noTrackingExplainer, 0):
             return true
         case (.privacyPolicy_v2018_05_15, 0):
             return false
@@ -267,6 +282,14 @@ fileprivate extension OnboardingScreen {
                 let nav = UINavigationController(rootViewController: langSelectionViewController)
                 self.present(nav, animated: true, completion: nil)
             }
+            
+        case (.noTrackingExplainer, 0):
+            onboardingView = OnboardingView(
+                image: UIImage(named: "NoTrackingOnboarding")!,
+                withTitle: UserStrings.No_tracking_title(),
+                withBody: UserStrings.No_tracking_body(),
+                withAccessoryView: nil
+            )
 
         case (.privacyPolicy_v2018_05_15, 0):
             onboardingView = makePrivacyPolicyOnboardingView(

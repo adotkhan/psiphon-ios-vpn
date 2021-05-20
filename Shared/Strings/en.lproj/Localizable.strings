@@ -120,6 +120,12 @@
 /* Subscriptions view text that is visible when the list of subscriptions is not available */
 "NO_PRODUCTS_TEXT_2" = "Could not retrieve subscriptions from the App Store. Please try again later.";
 
+/* No comment provided by engineer. */
+"NO_TRACKING_BODY" = "NO_TRACKING_BODY";
+
+/* Title of an onboarding screen. Advertising the fact that the app does not collect information that allows for a user to be tracked. */
+"NO_TRACKING_TITLE" = "No Tracking";
+
 /* Alert OK Button */
 "OK_BUTTON" = "OK";
 

@@ -238,6 +238,18 @@ import Foundation
                                  value: "Allow Psiphon to send notifications so that you can be notified of important network events.",
                                  comment: "Do not translate or transliterate 'Psiphon'. Onboarding screen asking user to give the Psiphon app permission to send notifications about important network events while they use the app.")
     }
+        
+    static func No_tracking_title() -> String {
+        return NSLocalizedString("NO_TRACKING_TITLE", tableName: nil, bundle: Bundle.main,
+                                 value: "No Tracking",
+                                 comment: "Title of an onboarding screen. Advertising the fact that the app does not collect information that allows for a user to be tracked.")
+    }
+    
+    static func No_tracking_body() -> String {
+        return NSLocalizedString("NO_TRACKING_BODY", tableName: nil, bundle: Bundle.main,
+                                 value: "",
+                                 comment: "")
+    }
     
     static func Select_language() -> String {
         return NSLocalizedString("SELECT_LANG", tableName: nil, bundle: Bundle.main,
