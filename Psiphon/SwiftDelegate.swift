@@ -404,9 +404,23 @@ extension SwiftDelegate: SwiftBridgeDelegate {
         return true
     }
     
+    func testAPN(_ application: UIApplication) {
+        
+        // applicationDidFinishLaunching...
+        
+        application.registerForRemoteNotifications()
+        
+        print("*** isRegistered? \(application.isRegisteredForRemoteNotifications)")
+        
+        
+    }
+    
     @objc func applicationDidFinishLaunching(
         _ application: UIApplication
     ) {
+        
+        testAPN(application)
+        
         self.feedbackLogger.immediate(.info, "applicationDidFinishLaunching")
         
         // Ensures settings values are copied, even if the PsiphonSettingsViewController

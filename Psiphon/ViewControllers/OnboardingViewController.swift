@@ -635,9 +635,37 @@ fileprivate func requestUserNotificationPermission(
                     .error, "user notification authorization error: '\(error)'")
             }
             
+            if granted {
+                
+                let viewAction = UNNotificationAction(
+                    identifier: "VIEW_ACTION", title: "View", options: [.foreground])
+                
+                let categories = UNNotificationCategory(
+                    identifier: "NEWS_CATEGORY",
+                    actions: [viewAction],
+                    intentIdentifiers: [],
+                    options: [])
+                
+                UNUserNotificationCenter.current().setNotificationCategories([ categories ])
+                
+                getNotificationSettings()
+                
+            }
+            
             DispatchQueue.main.async {
                 completionHandler()
             }
         }
     }
+}
+
+
+func getNotificationSettings() {
+  UNUserNotificationCenter.current().getNotificationSettings { settings in
+    print("*** Notification settings: \(settings)")
+    guard settings.authorizationStatus == .authorized else { return }
+    DispatchQueue.main.async {
+      UIApplication.shared.registerForRemoteNotifications()
+    }
+  }
 }

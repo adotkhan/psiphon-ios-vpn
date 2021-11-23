@@ -20,6 +20,20 @@
 		291C0BA6269CC21F0075FAB7 /* PersistentContainerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 291C0BA4269CC21F0075FAB7 /* PersistentContainerWrapper.m */; };
 		2927D234274579BE00FF493D /* FeedbackReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2927D233274579BE00FF493D /* FeedbackReader.swift */; };
 		292B531E2620DFCB00C0C44A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292B531D2620DFCB00C0C44A /* SettingsViewModel.swift */; };
+		294375E5274D93F500E09571 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 294375E4274D93F500E09571 /* NotificationService.m */; };
+		294375E9274D93F500E09571 /* PsiphonNotif.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 294375E1274D93F500E09571 /* PsiphonNotif.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		294375EF274D940800E09571 /* PsiFeedbackLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EF639C2E1F8FCE2A009D6B42 /* PsiFeedbackLogger.m */; };
+		294375F0274D940F00E09571 /* Nullity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFECCCF429898FD903B69A6 /* Nullity.m */; };
+		294375F1274D941200E09571 /* RotatingFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6795B24A4FA3200C4CA81 /* RotatingFile.m */; };
+		294375F3274D941E00E09571 /* NSDate+PSIDateExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF90D797204F22C900228A63 /* NSDate+PSIDateExtension.m */; };
+		294375F4274D942E00E09571 /* timestamp_compare.c in Sources */ = {isa = PBXBuildFile; fileRef = EF90D78E204F22C900228A63 /* timestamp_compare.c */; };
+		294375F5274D942E00E09571 /* timestamp_format.c in Sources */ = {isa = PBXBuildFile; fileRef = EF90D790204F22C900228A63 /* timestamp_format.c */; };
+		294375F6274D942E00E09571 /* timestamp_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = EF90D791204F22C900228A63 /* timestamp_parse.c */; };
+		294375F7274D942E00E09571 /* timestamp_tm.c in Sources */ = {isa = PBXBuildFile; fileRef = EF90D78F204F22C900228A63 /* timestamp_tm.c */; };
+		294375F8274D942E00E09571 /* timestamp_valid.c in Sources */ = {isa = PBXBuildFile; fileRef = EF90D78D204F22C900228A63 /* timestamp_valid.c */; };
+		294375F9274D94D300E09571 /* SharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93EE5424F55B92001F4EC9 /* SharedConstants.m */; };
+		294375FA274D951800E09571 /* AppStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 521FD0F6219E0DDF00F748EC /* AppStats.m */; };
+		294375FB274D95CA00E09571 /* DebugUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 521FD0FB219E0E0E00F748EC /* DebugUtils.m */; };
 		29587A8026C5ACD80015A79A /* FadingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29587A7F26C5ACD80015A79A /* FadingScrollView.swift */; };
 		295E329A2718B63100C77BEA /* UITestAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E32992718B63100C77BEA /* UITestAppState.swift */; };
 		296054AA265307770001E72D /* PsiCashAccountNameViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296054A9265307770001E72D /* PsiCashAccountNameViewWrapper.swift */; };
@@ -336,6 +350,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		294375E7274D93F500E09571 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE26FC821BBDC7B700B83375 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 294375E0274D93F500E09571;
+			remoteInfo = PsiphonNotif;
+		};
 		4E0D88261FA06B2400ADB61E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE26FC821BBDC7B700B83375 /* Project object */;
@@ -367,6 +388,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				CE26FCAC1BBDC85900B83375 /* PsiphonVPN.appex in Embed App Extensions */,
+				294375E9274D93F500E09571 /* PsiphonNotif.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +424,10 @@
 		291C0BA4269CC21F0075FAB7 /* PersistentContainerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersistentContainerWrapper.m; sourceTree = "<group>"; };
 		2927D233274579BE00FF493D /* FeedbackReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackReader.swift; sourceTree = "<group>"; };
 		292B531D2620DFCB00C0C44A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		294375E1274D93F500E09571 /* PsiphonNotif.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PsiphonNotif.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		294375E3274D93F500E09571 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		294375E4274D93F500E09571 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		294375E6274D93F500E09571 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29587A7F26C5ACD80015A79A /* FadingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadingScrollView.swift; sourceTree = "<group>"; };
 		295E32992718B63100C77BEA /* UITestAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestAppState.swift; sourceTree = "<group>"; };
 		296054A9265307770001E72D /* PsiCashAccountNameViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsiCashAccountNameViewWrapper.swift; sourceTree = "<group>"; };
@@ -883,6 +909,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		294375DE274D93F500E09571 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4E0D881E1FA06B2400ADB61E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -940,6 +973,16 @@
 				292B531D2620DFCB00C0C44A /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		294375E2274D93F500E09571 /* PsiphonNotif */ = {
+			isa = PBXGroup;
+			children = (
+				294375E3274D93F500E09571 /* NotificationService.h */,
+				294375E4274D93F500E09571 /* NotificationService.m */,
+				294375E6274D93F500E09571 /* Info.plist */,
+			);
+			path = PsiphonNotif;
 			sourceTree = "<group>";
 		};
 		2968042125F2D3A200D04B7F /* Recovered References */ = {
@@ -1337,6 +1380,7 @@
 				CE26FCA41BBDC85900B83375 /* PsiphonVPN */,
 				CEE5765B249AA01D00744C38 /* PsiphonTests */,
 				4E0D88221FA06B2400ADB61E /* PsiphonUITests */,
+				294375E2274D93F500E09571 /* PsiphonNotif */,
 				CE26FC8B1BBDC7B800B83375 /* Products */,
 				668AF9B81E92CB60008CAAAA /* Frameworks */,
 				FF0DC6191C07A3FC5D6EE10A /* Pods */,
@@ -1351,6 +1395,7 @@
 				CE26FCA31BBDC85900B83375 /* PsiphonVPN.appex */,
 				4E0D88211FA06B2400ADB61E /* PsiphonUITests.xctest */,
 				CEA1B778249AA9A0006D9853 /* PsiphonTests.xctest */,
+				294375E1274D93F500E09571 /* PsiphonNotif.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1727,6 +1772,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		294375E0274D93F500E09571 /* PsiphonNotif */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 294375EA274D93F600E09571 /* Build configuration list for PBXNativeTarget "PsiphonNotif" */;
+			buildPhases = (
+				294375DD274D93F500E09571 /* Sources */,
+				294375DE274D93F500E09571 /* Frameworks */,
+				294375DF274D93F500E09571 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PsiphonNotif;
+			productName = PsiphonNotif;
+			productReference = 294375E1274D93F500E09571 /* PsiphonNotif.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		4E0D88201FA06B2400ADB61E /* PsiphonUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E0D882A1FA06B2400ADB61E /* Build configuration list for PBXNativeTarget "PsiphonUITests" */;
@@ -1762,6 +1824,7 @@
 			);
 			dependencies = (
 				CE26FCAB1BBDC85900B83375 /* PBXTargetDependency */,
+				294375E8274D93F500E09571 /* PBXTargetDependency */,
 			);
 			name = Psiphon;
 			packageProductDependencies = (
@@ -1813,10 +1876,13 @@
 		CE26FC821BBDC7B700B83375 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Psiphon Inc.";
 				TargetAttributes = {
+					294375E0274D93F500E09571 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					4E0D88201FA06B2400ADB61E = {
 						CreatedOnToolsVersion = 9.1;
 						DevelopmentTeam = Q6HLNEX92A;
@@ -1917,11 +1983,19 @@
 				CE26FCA21BBDC85900B83375 /* PsiphonVPN */,
 				CEA1B777249AA9A0006D9853 /* PsiphonTests */,
 				4E0D88201FA06B2400ADB61E /* PsiphonUITests */,
+				294375E0274D93F500E09571 /* PsiphonNotif */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		294375DF274D93F500E09571 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4E0D881F1FA06B2400ADB61E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2024,6 +2098,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		294375DD274D93F500E09571 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				294375EF274D940800E09571 /* PsiFeedbackLogger.m in Sources */,
+				294375F1274D941200E09571 /* RotatingFile.m in Sources */,
+				294375F0274D940F00E09571 /* Nullity.m in Sources */,
+				294375FB274D95CA00E09571 /* DebugUtils.m in Sources */,
+				294375F8274D942E00E09571 /* timestamp_valid.c in Sources */,
+				294375F4274D942E00E09571 /* timestamp_compare.c in Sources */,
+				294375FA274D951800E09571 /* AppStats.m in Sources */,
+				294375F6274D942E00E09571 /* timestamp_parse.c in Sources */,
+				294375F7274D942E00E09571 /* timestamp_tm.c in Sources */,
+				294375E5274D93F500E09571 /* NotificationService.m in Sources */,
+				294375F9274D94D300E09571 /* SharedConstants.m in Sources */,
+				294375F3274D941E00E09571 /* NSDate+PSIDateExtension.m in Sources */,
+				294375F5274D942E00E09571 /* timestamp_format.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4E0D881D1FA06B2400ADB61E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2354,6 +2448,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		294375E8274D93F500E09571 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 294375E0274D93F500E09571 /* PsiphonNotif */;
+			targetProxy = 294375E7274D93F500E09571 /* PBXContainerItemProxy */;
+		};
 		4E0D88271FA06B2400ADB61E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE26FC891BBDC7B800B83375 /* Psiphon */;
@@ -2420,6 +2519,112 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		294375EB274D93F600E09571 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q6HLNEX92A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PsiphonNotif/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PsiphonNotif;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Psiphon Inc. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.psiphon.Psiphon.PsiphonNotif;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		294375EC274D93F600E09571 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PsiphonNotif/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PsiphonNotif;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Psiphon Inc. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.psiphon.Psiphon.PsiphonNotif;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		294375ED274D93F600E09571 /* DevRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q6HLNEX92A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PsiphonNotif/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PsiphonNotif;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Psiphon Inc. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.psiphon.Psiphon.PsiphonNotif;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DevRelease;
+		};
 		4E0D88281FA06B2400ADB61E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2541,6 +2746,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 473176E0E92FDF7B9DD30F1E /* Pods-Psiphon.devrelease.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2793,6 +2999,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EDB109A2FBFB32D821FF121D /* Pods-Psiphon.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2842,6 +3049,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 571DC9418AF936E60179F07C /* Pods-Psiphon.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -3017,6 +3225,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		294375EA274D93F600E09571 /* Build configuration list for PBXNativeTarget "PsiphonNotif" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				294375EB274D93F600E09571 /* Debug */,
+				294375EC274D93F600E09571 /* Release */,
+				294375ED274D93F600E09571 /* DevRelease */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4E0D882A1FA06B2400ADB61E /* Build configuration list for PBXNativeTarget "PsiphonUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
